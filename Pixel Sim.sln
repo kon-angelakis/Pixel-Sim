@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixel Sim", "Pixel Sim\Pixel Sim.csproj", "{836D1247-B5D9-4000-A980-30104A4979DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{836D1247-B5D9-4000-A980-30104A4979DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{836D1247-B5D9-4000-A980-30104A4979DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{836D1247-B5D9-4000-A980-30104A4979DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{836D1247-B5D9-4000-A980-30104A4979DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B41416D8-BD84-4C1A-AA2C-A9D0C0CE2012}
+	EndGlobalSection
+EndGlobal
