@@ -133,7 +133,7 @@ namespace Pixel_Sim
             //Clear canvas
             if (currentMouse.MiddleButton == ButtonState.Pressed)
             {
-                foreach (Cell c in grid)
+                foreach (Cell c in grid_drawn)
                 {
                     c.setValue(0);
                 }
