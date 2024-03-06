@@ -24,7 +24,7 @@ namespace Pixel_Sim
         private int cols = 16 * 20;
         private int cell_size;
 
-        private Cell[,] grid, grid_drawn;
+        private Cell[,] grid;
 
         public Game1()
         {
@@ -35,7 +35,7 @@ namespace Pixel_Sim
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
 
-            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);
+            TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 165.0f);
         }
 
 
@@ -48,7 +48,6 @@ namespace Pixel_Sim
 
 
             grid = new Cell[cols, rows];
-            grid_drawn = new Cell[cols, rows];
 
             //dynamic cell size according to set resolution
             cell_size = resX / cols;
@@ -58,7 +57,6 @@ namespace Pixel_Sim
                 for (int y = 0; y < rows; y++)
                 {
                     grid[x, y] = new Cell(x * resY / rows, y * resX / cols, cell_size, texture, Color.Gold);
-                    grid_drawn[x, y] = new Cell(x * resY / rows, y * resX / cols, cell_size, texture, Color.Gold);
 
                 }
             }
@@ -69,15 +67,16 @@ namespace Pixel_Sim
         {
             CheckControls();
 
-            for (int x = cols - 2; x >= 1; x--)
+            //Start from bottom left corner of the grid
+            for (int y = rows - 2; y >= 0; y--)
             {
-                for (int y = rows - 2; y >= 0; y--)
+                for (int x = 1; x < cols -2 ; x++)
                 {
-                    //Don't update empty cells save resources 
-                    if (grid_drawn[x, y].getValue() != 0)
+                    //Don't update cells with no element, save resources 
+                    if (grid[x, y].getElement() != null)
                     {
-                        grid_drawn[x, y].UpdateNeighbours(grid_drawn[x - 1, y], grid_drawn[x + 1, y], grid_drawn[x, y + 1], grid_drawn[x - 1, y + 1], grid_drawn[x + 1, y + 1]);
-                        grid_drawn[x, y].UpdateCell();
+                        grid[x, y].UpdateNeighbours(grid[x - 1, y], grid[x + 1, y], grid[x, y + 1], grid[x - 1, y + 1], grid[x + 1, y + 1]);
+                        grid[x, y].UpdateCell(r);
 
                     }
 
@@ -94,12 +93,12 @@ namespace Pixel_Sim
             _spriteBatch.Begin();
 
             //Placement preview
-            grid_drawn[(int)Math.Floor((double)Mouse.GetState().X / cell_size), (int)Math.Floor((double)Mouse.GetState().Y / cell_size)].Draw(_spriteBatch);
+            grid[(int)Math.Floor((double)Mouse.GetState().X / cell_size), (int)Math.Floor((double)Mouse.GetState().Y / cell_size)].Draw(_spriteBatch);
 
-            foreach (Cell c in grid_drawn)
+            foreach (Cell c in grid)
             {
                 //If not empty cell draw
-                if (c.getValue() != 0)
+                if (c.getElement() != null)
                     c.Draw(_spriteBatch);
 
             }
@@ -125,17 +124,17 @@ namespace Pixel_Sim
 
             if (currentMouse.LeftButton == ButtonState.Pressed)
             {
-                if (mouseCellX > 0 && mouseCellX < cols - 1)
-                    grid_drawn[(int)mouseCellX, (int)mouseCellY].setValue(1);
-
+                if ((int)mouseCellX > 0 && (int)mouseCellX < cols - 2)
+                    grid[(int)mouseCellX, (int)mouseCellY].setElement(new Sand());
             }
+
 
             //Clear canvas
             if (currentMouse.MiddleButton == ButtonState.Pressed)
             {
-                foreach (Cell c in grid_drawn)
+                foreach (Cell c in grid)
                 {
-                    c.setValue(0);
+                    c.setElement(null);
                 }
             }
 

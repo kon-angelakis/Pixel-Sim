@@ -13,16 +13,16 @@ namespace Pixel_Sim
 
         private int x;
         private int y;
-
         private int size;
-
-        private int value = 0;
 
         private Texture2D texture;
 
         private Color color;
 
         public Cell down, left, right, down_left, down_right;
+
+        public Element E;
+
 
         public Cell(int x, int y, int size, Texture2D texture, Color color)
         {
@@ -48,38 +48,19 @@ namespace Pixel_Sim
         }
 
 
-        public void UpdateCell()
+        public void UpdateCell(Random r)
         {
-            if (this.value != 0)
-            {
-                if (this.down.getValue() == 0)
-                {
-                    this.setValue(0);
-                    this.down.setValue(1);
-
-                }
-                else if (this.down_right.getValue() == 0)
-                {
-                    this.setValue(0);
-                    this.down_right.setValue(1);
-                }
-                else if (this.down_left.getValue() == 0)
-                {
-                    this.setValue(0);
-                    this.down_left.setValue(1);
-                }
-
-            }
+            E.UpdatePosition(this, left, right, down, down_left, down_right, r);
         }
 
-        public void setValue(int n)
+        public void setElement(Element E)
         {
-            this.value = n;
+            this.E = E;
         }
 
-        public int getValue()
+        public Element getElement()
         {
-            return (this.value);
+            return (this.E);
         }
 
     }
