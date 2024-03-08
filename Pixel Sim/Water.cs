@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Pixel_Sim
 {
-    internal class Sand : Solid
+    internal class Water : Liquid
     {
-        public Sand() { this.color = Color.Gold; }
 
+        public Water() { this.color = new Color(46, 137, 255); }
     }
 }
