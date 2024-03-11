@@ -8,39 +8,39 @@ namespace Pixel_Sim
 {
     internal abstract class Liquid : Element
     {
-        private double viscocity;
-        private bool flammable;
-
-        public override void UpdatePosition(Cell cur, Cell left, Cell right, Cell down, Cell down_L, Cell down_R, Random r)
+        protected bool flow_direction;
+        public override void ChangeCell(Cell current)
         {
-
-
-            if (down != null && down.GetElement() == null)
+            if (current.Down != null && current.Down.GetElement() is None)
             {
-                // If empty, move the liquid downward
-                cur.SetElement(null);
-                down.SetElement(this);
+                GameLogic.SwapCell(current, current.Down);
             }
             else
             {
-                if (left != null && left.GetElement() == null)
+                if (flow_direction)
                 {
-                    // Check left
-                    cur.SetElement(null);
-                    left.SetElement(this);
+                    if (current.Left != null && current.Left.GetElement() is None)
+                    {
+                        GameLogic.SwapCell(current, current.Left);
+                    }else if (current.Right != null && current.Right.GetElement() is None )
+                    {
+                        GameLogic.SwapCell(current, current.Right);
+                        flow_direction = !flow_direction;
+                    }
                 }
-                else if (right != null && right.GetElement() == null)
+                else
                 {
-                    // Check right
-                    cur.SetElement(null);
-                    right.SetElement(this);
+                    if (current.Right != null && current.Right.GetElement() is None)
+                    {
+                        GameLogic.SwapCell(current, current.Right);
+                    }
+                    else if (current.Left != null && current.Left.GetElement() is None)
+                    {
+                        GameLogic.SwapCell(current, current.Left);
+                        flow_direction = !flow_direction;
+                    }
                 }
             }
-
-
-
         }
-
     }
-
 }

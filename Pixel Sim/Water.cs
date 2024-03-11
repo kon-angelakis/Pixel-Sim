@@ -9,7 +9,10 @@ namespace Pixel_Sim
 {
     internal class Water : Liquid
     {
-
-        public Water() { this.color = new Color(46, 137, 255); }
+        public Water(bool flow_direction) 
+        { 
+            this.color = new Color(66, 192, 255);
+            this.flow_direction = flow_direction; 
+        }
     }
 }

@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace Pixel_Sim
 {
-    internal class Stone : Solid
+    internal class None : Element
     {
-        public Stone() { this.color = Color.Gray; }
+        public None() { this.color = Color.Black; }
 
-        public override void ChangeCell(Cell current)
-        {
-            
-        }
+        public override void ChangeCell(Cell current) { }
     }
 }
