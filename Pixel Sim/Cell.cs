@@ -13,12 +13,18 @@ namespace Pixel_Sim
         private int x, y;
         private Element e = new None();
         public Cell Left, Right, Down, Down_L, Down_R;
+
         public Cell(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
 
         }
+
+        //Setters and Getters
+        public int X { set { this.x = value; } get { return (this.x); } }
+        public int Y { set { this.y = value; } get { return (this.y); } }
+        public Element Element { set { this.e = value; } get { return (this.e); } }
 
         public void UpdateNeighbours(Cell l, Cell r, Cell d, Cell d_l, Cell d_r)
         {
@@ -27,17 +33,12 @@ namespace Pixel_Sim
             this.Down = d;
             this.Down_L = d_l;
             this.Down_R = d_r;
+
         }
 
-        public void UpdateCell()
+        public void UpdateCell(Cell[,] grid)
         {
-            e.ChangeCell(this);
+            e.ChangeCell(this, grid);
         }
-        public void SetElement(Element e) { this.e = e; }
-
-        public int GetX() {  return x; }
-        public int GetY() { return y; }
-        public Color GetCellColor() { return e.GetColor(); }
-        public Element GetElement() { return e; }
     }
 }

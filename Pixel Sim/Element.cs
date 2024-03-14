@@ -13,9 +13,9 @@ namespace Pixel_Sim
 
         protected Color color;
 
-        public Color GetColor() {  return color; }
+        public Color Color { get { return color; } }
 
-        public abstract void ChangeCell(Cell current);
+        public abstract void ChangeCell(Cell current, Cell[,] grid);
 
     }
 }

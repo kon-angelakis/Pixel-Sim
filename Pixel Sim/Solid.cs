@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Pixel_Sim.Logic;
 
 namespace Pixel_Sim
 {
@@ -10,26 +11,26 @@ namespace Pixel_Sim
     {
         protected bool fall_direction;
 
-        public override void ChangeCell(Cell current)
+        public override void ChangeCell(Cell current, Cell[,] grid)
         {
-            if (current.Down != null && current.Down.GetElement() is None)
+            if (current.Down != null && current.Down.Element is None)
             {
-                GameLogic.SwapCell(current, current.Down);
+                GridLogic.SwapCell(grid, current, current.Down);
             }
-            else if (current.Down_L != null && current.Down_R != null && current.Down_L.GetElement() is None && current.Down_R.GetElement() is None)
+            else if (current.Down_L != null && current.Down_R != null && current.Down_L.Element is None && current.Down_R.Element is None)
             {
                 if (fall_direction)
-                    GameLogic.SwapCell(current, current.Down_L);
+                    GridLogic.SwapCell(grid, current, current.Down_L);
                 else
-                    GameLogic.SwapCell(current, current.Down_R);
+                    GridLogic.SwapCell(grid, current, current.Down_R);
             }
-            else if (current.Down_L != null && current.Down_L.GetElement() is None)
+            else if (current.Down_L != null && current.Down_L.Element is None)
             {
-                GameLogic.SwapCell(current, current.Down_L);
+                GridLogic.SwapCell(grid, current, current.Down_L);
             }
-            else if (current.Down_R != null && current.Down_R.GetElement() is None)
+            else if (current.Down_R != null && current.Down_R.Element is None)
             {
-                GameLogic.SwapCell(current, current.Down_R);
+                GridLogic.SwapCell(grid, current, current.Down_R);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Pixel_Sim.Logic;
 using System;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
@@ -20,6 +21,8 @@ namespace Pixel_Sim
         private int rows = 9 * 12;
         private int cols = 16 * 12;
         public int cell_size;
+
+        private SpriteFont font;
 
         public Game1()
         {
@@ -41,6 +44,8 @@ namespace Pixel_Sim
             grid = new Cell[cols, rows];
             cell_size = resX / cols;
 
+            font = Content.Load<SpriteFont>("Fonts/PlacementPreview");
+
             base.Initialize();
         }
 
@@ -60,9 +65,8 @@ namespace Pixel_Sim
         protected override void Update(GameTime gameTime)
         {
 
-            GameLogic.UpdateGrid(grid, rows, cols);
-            GameLogic.CheckControls(this, grid);
-
+            GameControl.CheckControls(this, grid);
+            GridLogic.UpdateGrid(grid, rows, cols);
 
             base.Update(gameTime);
         }
@@ -72,15 +76,18 @@ namespace Pixel_Sim
             GraphicsDevice.Clear(new Color(0, 0, 0));
 
             _spriteBatch.Begin();
-            for (int y = rows - 1; y >= 0; y--)
+
+            for (int y = 0; y < rows; y++)
             {
-                for (int x = cols - 1; x >= 0; x--)
+                for (int x = 0; x < cols; x++)
                 {
-                    if (grid[x, y].GetElement() is not None)
-                        _spriteBatch.Draw(texture, new Rectangle(grid[x, y].GetX() * cell_size, grid[x, y].GetY() * cell_size, cell_size, cell_size), grid[x, y].GetCellColor());
+                    if (grid[x, y].Element is not None)
+                        _spriteBatch.Draw(texture, new Rectangle(grid[x, y].X * cell_size, grid[x, y].Y * cell_size, cell_size, cell_size), grid[x, y].Element.Color);
 
                 }
             }
+            _spriteBatch.DrawString(font, GameControl.GetElementName(), new Vector2(Mouse.GetState().X, Mouse.GetState().Y - 35), Color.White);
+          
             _spriteBatch.End();
 
             base.Draw(gameTime);

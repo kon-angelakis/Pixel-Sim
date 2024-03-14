@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Input;
+using Pixel_Sim.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,38 +11,43 @@ namespace Pixel_Sim
     internal abstract class Liquid : Element
     {
         protected bool flow_direction;
-        public override void ChangeCell(Cell current)
+        public override void ChangeCell(Cell current, Cell[,] grid)
         {
-            if (current.Down != null && current.Down.GetElement() is None)
+            if (current.Down != null && current.Down.Element is None)
             {
-                GameLogic.SwapCell(current, current.Down);
+                GridLogic.SwapCell(grid, current, current.Down);
             }
             else
             {
+
                 if (flow_direction)
                 {
-                    if (current.Left != null && current.Left.GetElement() is None)
+                    if (current.Left != null && current.Left.Element is None)
                     {
-                        GameLogic.SwapCell(current, current.Left);
-                    }else if (current.Right != null && current.Right.GetElement() is None )
+                        GridLogic.SwapCell(grid, current, current.Left);
+                    }
+                    else if (current.Right != null && current.Right.Element is None)
                     {
-                        GameLogic.SwapCell(current, current.Right);
+                        GridLogic.SwapCell(grid, current, current.Right);
                         flow_direction = !flow_direction;
                     }
+
                 }
                 else
                 {
-                    if (current.Right != null && current.Right.GetElement() is None)
+                    if (current.Right != null && current.Right.Element is None)
                     {
-                        GameLogic.SwapCell(current, current.Right);
+                        GridLogic.SwapCell(grid, current, current.Right);
                     }
-                    else if (current.Left != null && current.Left.GetElement() is None)
+                    else if (current.Left != null && current.Left.Element is None)
                     {
-                        GameLogic.SwapCell(current, current.Left);
+                        GridLogic.SwapCell(grid, current, current.Left);
                         flow_direction = !flow_direction;
                     }
                 }
             }
+
+
         }
     }
 }

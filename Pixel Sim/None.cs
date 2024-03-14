@@ -9,8 +9,8 @@ namespace Pixel_Sim
 {
     internal class None : Element
     {
-        public None() { this.color = Color.Black; }
+        public None() { color = Color.Transparent; }
 
-        public override void ChangeCell(Cell current) { }
+        public override void ChangeCell(Cell current, Cell[,] grid) { }
     }
 }

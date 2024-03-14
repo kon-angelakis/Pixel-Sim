@@ -9,11 +9,16 @@ namespace Pixel_Sim
 {
     internal class Stone : Solid
     {
-        public Stone() { this.color = Color.Gray; }
-
-        public override void ChangeCell(Cell current)
+        public Stone()
         {
-            
+            int c = r.Next(50, 100);
+            color = new Color(c, c, c);
+
+        }
+
+        public override void ChangeCell(Cell current, Cell[,] grid)
+        {
+
         }
     }
 }
