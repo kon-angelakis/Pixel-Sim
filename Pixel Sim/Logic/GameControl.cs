@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Pixel_Sim.Elements;
+using Pixel_Sim.Elements.Abstraction;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -16,6 +18,8 @@ namespace Pixel_Sim.Logic
             { Keys.Z, "Sand" },
             { Keys.X, "Water" },
             { Keys.C, "Stone" },
+            { Keys.W, "Wood" },
+            { Keys.F, "Fire" },
         };
 
 
@@ -39,7 +43,7 @@ namespace Pixel_Sim.Logic
 
             if (Mouse.GetState().MiddleButton == ButtonState.Pressed)
                 foreach (Cell c in grid)
-                    c.Element = new None();
+                    c.Reset();
 
             //Get new key with each keyboard button stroke. Also get element name for text preview
             if (Keyboard.GetState().GetPressedKeys().Length > 0)
@@ -68,6 +72,16 @@ namespace Pixel_Sim.Logic
                         break;
                     case Keys.C:
                         grid[(int)mouseCellX, (int)mouseCellY].Element = new Stone();
+                        break;
+                    case Keys.W:
+                        for (int i = (int)mouseCellX - 3; i < (int)mouseCellX + 3; i++)
+                            for (int j = (int)mouseCellY - 3; j < (int)mouseCellY + 3; j++)
+                                grid[i, j].Element = new Wood();
+                        break;
+                    case Keys.F:
+                        for (int i = (int)mouseCellX - 2; i < (int)mouseCellX + 2; i++)
+                            for (int j = (int)mouseCellY - 2; j < (int)mouseCellY + 2; j++)
+                                grid[i, j].Element = new Fire();
                         break;
                     default:
                         break;

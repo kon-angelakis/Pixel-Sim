@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
+using Pixel_Sim.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pixel_Sim
+namespace Pixel_Sim.Elements.Abstraction
 {
     internal class None : Element
     {

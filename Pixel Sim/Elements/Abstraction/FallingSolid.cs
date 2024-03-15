@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Pixel_Sim.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Pixel_Sim.Logic;
 
-namespace Pixel_Sim
+namespace Pixel_Sim.Elements.Abstraction
 {
-    internal abstract class Solid : Element
+    internal abstract class FallingSolid : Solid
     {
         protected bool fall_direction;
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pixel_Sim
+namespace Pixel_Sim.Elements.Abstraction
 {
     internal abstract class Liquid : Element
     {
@@ -31,6 +31,7 @@ namespace Pixel_Sim
                         GridLogic.SwapCell(grid, current, current.Right);
                         flow_direction = !flow_direction;
                     }
+        
 
                 }
                 else
@@ -44,6 +45,7 @@ namespace Pixel_Sim
                         GridLogic.SwapCell(grid, current, current.Left);
                         flow_direction = !flow_direction;
                     }
+     
                 }
             }
 

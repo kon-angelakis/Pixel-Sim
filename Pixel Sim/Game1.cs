@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Pixel_Sim.Elements.Abstraction;
 using Pixel_Sim.Logic;
 using System;
 using System.Data.Common;
@@ -18,8 +19,8 @@ namespace Pixel_Sim
         private Random r = new Random();
 
         private Cell[,] grid;
-        private int rows = 9 * 12;
-        private int cols = 16 * 12;
+        private int rows = 9 * 20;
+        private int cols = 16 * 20;
         public int cell_size;
 
         private SpriteFont font;

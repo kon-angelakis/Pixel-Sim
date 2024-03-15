@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Pixel_Sim.Elements;
+using Pixel_Sim.Elements.Abstraction;
 
 namespace Pixel_Sim.Logic
 {
@@ -17,11 +19,14 @@ namespace Pixel_Sim.Logic
                 {
                     if (grid[x, y].Element is not None)
                         grid[x, y].UpdateNeighbours(
-                            x > 0 ? grid[x - 1, y] : null,
-                            x < cols - 1 ? grid[x + 1, y] : null,
-                            y < rows - 1 ? grid[x, y + 1] : null,
-                            x > 0 && y < rows - 1 ? grid[x - 1, y + 1] : null,
-                            x < cols - 1 && y < rows - 1 ? grid[x + 1, y + 1] : null
+                            y > 0 ? grid[x, y - 1] : null, //up
+                            y > 0 && x > 0 ? grid[x - 1, y - 1] : null, //up_left
+                            y > 0 && x < cols - 1 ? grid[x + 1, y - 1] : null, //up_right
+                            x > 0 ? grid[x - 1, y] : null, //left
+                            x < cols - 1 ? grid[x + 1, y] : null, //right
+                            y < rows - 1 ? grid[x, y + 1] : null, //down
+                            x > 0 && y < rows - 1 ? grid[x - 1, y + 1] : null, //down_left
+                            x < cols - 1 && y < rows - 1 ? grid[x + 1, y + 1] : null //down_right
                         );
 
 
@@ -61,6 +66,11 @@ namespace Pixel_Sim.Logic
             current.Y = destination.Y;
             destination.X = tmpX;
             destination.Y = tmpY;
+        }
+    
+        public static void SpreadFire(Cell destination)
+        {
+            destination.Element = new Fire();
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Pixel_Sim.Logic;
+
+namespace Pixel_Sim.Elements.Abstraction
+{
+    internal abstract class NonFallingSolid : Solid
+    {
+        public override void ChangeCell(Cell current, Cell[,] grid) { /* Do nothing */ }
+
+    }
+}

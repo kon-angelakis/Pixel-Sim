@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Pixel_Sim.Elements.Abstraction;
 using Pixel_Sim.Logic;
 using System;
 using System.Collections.Generic;
@@ -6,14 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pixel_Sim
+namespace Pixel_Sim.Elements
 {
-    internal class Sand : Solid
+    internal class Sand : FallingSolid
     {
         private bool submerged_direction;
         public Sand(bool fall_direction)
         {
             color = new Color(245, r.Next(150, 210), 66);
+            IsFlammable = false;
             this.fall_direction = fall_direction;
         }
 
